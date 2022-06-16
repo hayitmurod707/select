@@ -1,2 +1,0 @@
-# select
-Default select component

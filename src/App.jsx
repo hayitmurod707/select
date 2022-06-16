@@ -14,6 +14,10 @@ const App = () => {
 			label: 'Label 3',
 			value: 3,
 		},
+		{
+			label: 'Label 4',
+			value: 4,
+		},
 	]);
 	const [value, setValue] = useState({
 		label: 'Label 1',

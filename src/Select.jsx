@@ -8,23 +8,26 @@ const defaultOptions = {
 	menuPlacement: 'auto',
 	noOptionsMessage: () => 'No options',
 	styles: {
-		option: (provided, { isFocused, isSelected }) => ({
-			...provided,
+		option: (styles, { isFocused, isSelected }) => ({
+			...styles,
 			background: isSelected || isFocused ? 'blue' : '#f7f8fc',
 			color: isSelected || isFocused ? '#ffffff' : '#000000',
 			cursor: 'pointer',
 			fontSize: '15px',
 			height: 48,
+			overflow: 'hidden',
 			padding: '15px 16px',
+			textOverflow: 'ellipsis',
+			whiteSpace: 'nowrap',
 			width: '100%',
 		}),
-		singleValue: provided => ({
-			...provided,
+		singleValue: styles => ({
+			...styles,
 			color: '#000000',
 			margin: '0',
 		}),
-		control: provided => ({
-			...provided,
+		control: styles => ({
+			...styles,
 			'background': '#f7f8fc',
 			'border': '1px solid #e2e4ea',
 			'borderRadius': 8,
@@ -40,8 +43,8 @@ const defaultOptions = {
 				border: '1px solid #e2e4ea',
 			},
 		}),
-		menu: provided => ({
-			...provided,
+		menu: styles => ({
+			...styles,
 			background: '#f7f8fc',
 			border: 'none',
 			borderRadius: 8,
@@ -50,8 +53,8 @@ const defaultOptions = {
 			overflow: 'hidden',
 			padding: 0,
 		}),
-		menuList: provided => ({
-			...provided,
+		menuList: styles => ({
+			...styles,
 			'padding': 0,
 			'::-webkit-scrollbar': {
 				width: 7,
@@ -65,12 +68,12 @@ const defaultOptions = {
 				borderRadius: 4,
 			},
 		}),
-		indicatorSeparator: provided => ({
-			...provided,
+		indicatorSeparator: styles => ({
+			...styles,
 			display: 'none',
 		}),
-		dropdownIndicator: (provided, { selectProps: { menuIsOpen } }) => ({
-			...provided,
+		dropdownIndicator: (styles, { selectProps: { menuIsOpen } }) => ({
+			...styles,
 			'alignItems': 'center',
 			'color': '#000000',
 			'display': 'flex',
@@ -79,22 +82,22 @@ const defaultOptions = {
 			'padding': '0',
 			'transform': `rotate(${menuIsOpen ? '180deg' : '0'})`,
 			'transformOrigin': 'center',
-			'transition': '0.5s',
+			'transition': '0.4s',
 			'width': 19,
 			':hover': {
 				color: '#000000',
 			},
 		}),
-		indicatorsContainer: provided => ({ ...provided, overflow: 'hidden' }),
-		valueContainer: provided => ({
-			...provided,
+		indicatorsContainer: styles => ({ ...styles, overflow: 'hidden' }),
+		valueContainer: styles => ({
+			...styles,
 			display: 'flex',
 			fontSize: '15px',
 			height: 48,
 			padding: '15px 16px',
 		}),
-		noOptionsMessage: provided => ({
-			...provided,
+		noOptionsMessage: styles => ({
+			...styles,
 			color: '#000000',
 			cursor: 'not-allowed',
 			fontSize: '15px',

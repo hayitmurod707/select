@@ -1,5 +1,5 @@
 import { array, bool, func, object } from 'prop-types';
-import Select from 'react-select/creatable';
+import ReactSelect from 'react-select/creatable';
 const defaultOptions = {
 	isClearable: false,
 	isMulti: false,
@@ -8,18 +8,22 @@ const defaultOptions = {
 	menuPlacement: 'auto',
 	noOptionsMessage: () => 'No options',
 	styles: {
-		option: (styles, { isFocused, isSelected }) => ({
+		option: (styles, { isSelected, isDisabled }) => ({
 			...styles,
-			background: isSelected || isFocused ? 'blue' : '#f7f8fc',
-			color: isSelected || isFocused ? '#ffffff' : '#000000',
-			cursor: 'pointer',
-			fontSize: '15px',
-			height: 48,
-			overflow: 'hidden',
-			padding: '15px 16px',
-			textOverflow: 'ellipsis',
-			whiteSpace: 'nowrap',
-			width: '100%',
+			'background': isDisabled ? 'grey' : isSelected ? 'blue' : '#f7f8fc',
+			'color': isDisabled ? '#000000' : isSelected ? '#ffffff' : '#000000',
+			'cursor': isDisabled ? 'not-allowed' : 'pointer',
+			'fontSize': '15px',
+			'height': '48px',
+			'overflow': 'hidden',
+			'padding': '15px 16px',
+			'textOverflow': 'ellipsis',
+			'whiteSpace': 'nowrap',
+			'width': '100%',
+			':hover': {
+				background: isDisabled ? 'grey' : 'blue',
+				color: isDisabled ? '#000000' : '#ffffff',
+			},
 		}),
 		singleValue: styles => ({
 			...styles,
@@ -30,15 +34,15 @@ const defaultOptions = {
 			...styles,
 			'background': '#f7f8fc',
 			'border': '1px solid #e2e4ea',
-			'borderRadius': 8,
+			'borderRadius': '8px',
 			'boxShadow': 'none',
 			'color': 'black',
 			'cursor': 'pointer',
-			'height': 48,
-			'outline': 'none',
-			'padding': 0,
-			'width': '100%',
+			'height': '48px',
 			'minWidth': '100px',
+			'outline': 'none',
+			'padding': '0px',
+			'width': '100%',
 			':hover': {
 				border: '1px solid #e2e4ea',
 			},
@@ -47,25 +51,25 @@ const defaultOptions = {
 			...styles,
 			background: '#f7f8fc',
 			border: 'none',
-			borderRadius: 8,
+			borderRadius: '8px',
 			boxShadow: '0 0 7px rgba(0, 0, 0, 0.1)',
-			margin: 0,
+			margin: '0px',
 			overflow: 'hidden',
-			padding: 0,
+			padding: '0px',
 		}),
 		menuList: styles => ({
 			...styles,
-			'padding': 0,
+			'padding': '0px',
 			'::-webkit-scrollbar': {
-				width: 7,
-				height: 7,
+				width: '7px',
+				height: '7px',
 			},
 			'::-webkit-scrollbar-track': {
 				background: 'transparent',
 			},
 			'::-webkit-scrollbar-thumb': {
 				background: 'blue',
-				borderRadius: 4,
+				borderRadius: '4px',
 			},
 		}),
 		indicatorSeparator: styles => ({
@@ -83,7 +87,7 @@ const defaultOptions = {
 			'transform': `rotate(${menuIsOpen ? '180deg' : '0'})`,
 			'transformOrigin': 'center',
 			'transition': '0.4s',
-			'width': 19,
+			'width': '19px',
 			':hover': {
 				color: '#000000',
 			},
@@ -93,7 +97,7 @@ const defaultOptions = {
 			...styles,
 			display: 'flex',
 			fontSize: '15px',
-			height: 48,
+			height: '48px',
 			padding: '15px 16px',
 		}),
 		noOptionsMessage: styles => ({
@@ -101,31 +105,22 @@ const defaultOptions = {
 			color: '#000000',
 			cursor: 'not-allowed',
 			fontSize: '15px',
-			height: 48,
+			height: '48px',
 			padding: '15px 16px',
 			textAlign: 'left',
 			width: '100%',
 		}),
 	},
 };
-const Component = ({ isDisabled, onChange, onFocus, options, value }) => (
-	<Select
-		{...defaultOptions}
-		isDisabled={isDisabled}
-		onChange={onChange}
-		onFocus={onFocus}
-		options={options}
-		value={value}
-	/>
-);
-Component.defaultProps = {
+const Select = props => <ReactSelect {...defaultOptions} {...props} />;
+Select.defaultProps = {
 	isDisabled: false,
 };
-Component.propTypes = {
+Select.propTypes = {
 	isDisabled: bool,
-	onChange: func,
+	onChange: func.isRequired,
 	onFocus: func,
-	options: array,
-	value: object,
+	options: array.isRequired,
+	value: object.isRequired,
 };
-export default Component;
+export default Select;

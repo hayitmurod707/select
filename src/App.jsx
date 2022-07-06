@@ -5,6 +5,7 @@ const App = () => {
 		{
 			label: 'Label 1',
 			value: 1,
+			isDisabled: true,
 		},
 		{
 			label: 'Label 2',
@@ -25,11 +26,7 @@ const App = () => {
 	});
 	return (
 		<div style={{ width: '250px' }}>
-			<Select
-				onChange={value => setValue(value)}
-				options={options}
-				value={value}
-			/>
+			<Select onChange={setValue} options={options} value={value} />
 		</div>
 	);
 };
